@@ -41,23 +41,23 @@
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
 
-        fetch("http://127.0.0.1:8080/auth/signup", {
+        const res = await fetch("/auth/signup", {
           method: "POST",
-          header: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             userid: userid,
             password: password,
             name: name,
             email: email,
           }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("서버응답:", data);
-          })
-          .catch((error) => {
-            console.log("서버응답 실패", error);
-          });
+        });
+        const result = await res.json();
+        if (res.ok) {
+          alert(result.message);
+          window.location.href = "/main_042825.html";
+        } else {
+          alert(result.message);
+        }
       }
     </script>
   </body>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>메인화면</title>
+  </head>
+  <body>
+    <h2>환영합니다.</h2>
+    <!-- 로그인 후에는 로그인 정보를 p태그에 innerText로 삽입 -->
+    <p>로그인이 필요합니다.</p>
+    <button id="toLogin">로그인하기</button>
+    <button id="toSignup">회원가입하기</button>
+    <script>
+      // 회원가입창으로 이동
+      document.getElementById("toSignup").addEventListener("click", () => {
+        window.location.href = "/auth/signup";
+        // window.location.href 하면 url 주소가 입력한곳으로 바뀌면서 "get방식"으로 url요청함.
+      });
+      //로그인 창으로 이동.
+      document.getElementById("toLogin").addEventListener("click", () => {
+        window.location.href = "/auth/login";
+      });
+    </script>
+  </body>
+</html>

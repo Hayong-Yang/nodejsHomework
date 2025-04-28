@@ -20,5 +20,13 @@ export async function signUp(userid, password, name, email) {
     email,
   };
   users = [user, ...users];
-  return users;
+  return user;
+}
+
+// 로그인 함수
+export async function login(userid, password) {
+  const user = users.find((user) => {
+    return user.userid === userid && user.password === password;
+  });
+  return user;
 }
