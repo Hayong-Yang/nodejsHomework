@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시물 목록</title>
+  </head>
+  <body>
+    <h2>게시판입니다. 게시물들을 확인할 수 있습니다.</h2>
+    <p id="posts_box">게시물이 보이는 곳입니다.</p>
+    <label for="findPost">내 게시물 검색</label>
+    <input
+      type="text"
+      ,
+      id="findPost"
+      ,
+      name="findPost"
+      placeholder="유저아이디를 입력하세요"
+    />
+    <button onclick="findByUserid()">내 게시물 검색</button>
+
+    <button id="goToNewPost">새 게시물 작성하기</button>
+    <script>
+      // 페이지 열리자 마자 모든 게시물 보이게 하기. window.onload 사용
+      // window.onload : 페이지가 로딩되자마자.. 실행할것
+      async function loadPost() {
+        const postbox = document.getElementById("posts_box");
+        const res = await fetch("/posts/load", {
+          method: "GET",
+          headers: { "Content-type": "application/json" },
+        });
+        const result = await res.json();
+        if (res.ok) {
+          postbox.innerText = result
+            .map((p) => `[${p.userid}]: ${p.text}`)
+            .join("\n");
+        } else {
+          alert({ message: `게시물을 불러오는데 실패하였습니다.` });
+        }
+      }
+
+      // 내 게시물 검색
+      async function findByUserid() {
+        const userid = document.getElementById("findPost").value;
+        const postBox = document.getElementById("posts_box");
+        const res = await fetch(`/posts/${userid}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userid: userid }),
+        });
+        const result = await res.json();
+        if (res.ok) {
+          postBox.innerText = result
+            .map((p) => `[:${p.userid}]: ${p.text}`)
+            .join("\n");
+        } else {
+          alert(result.message);
+        }
+      }
+
+      // 새로운 게시물 작성하는 페이지로 이동
+      document.getElementById("goToNewPost").addEventListener("click", () => {
+        window.location.href = "/posts/newPost";
+      });
+      window.onload = loadPost;
+    </script>
+  </body>
+</html>

@@ -8,6 +8,13 @@ let users = [
     name: "master",
     email: "master@master.com",
   },
+  {
+    id: "1",
+    userid: "6bim",
+    password: "12345678",
+    name: "6bim",
+    email: "6bim@6bim.com",
+  },
 ];
 
 // 회원가입 함수

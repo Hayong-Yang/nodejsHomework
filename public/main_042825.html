@@ -11,6 +11,9 @@
     <p>로그인이 필요합니다.</p>
     <button id="toLogin">로그인하기</button>
     <button id="toSignup">회원가입하기</button>
+    <button id="toPosts">게시물 보러가기</button>
+    <button id="toNewPosts">새 게시물 작성하기</button>
+
     <script>
       // 회원가입창으로 이동
       document.getElementById("toSignup").addEventListener("click", () => {
@@ -20,6 +23,14 @@
       //로그인 창으로 이동.
       document.getElementById("toLogin").addEventListener("click", () => {
         window.location.href = "/auth/login";
+      });
+      // 게시판으로 이동.
+      document.getElementById("toPosts").addEventListener("click", () => {
+        window.location.href = "/posts";
+      });
+      // 새로운 게시물 작성하는 페이지로 이동
+      document.getElementById("toNewPosts").addEventListener("click", () => {
+        window.location.href = "/posts/newPost";
       });
     </script>
   </body>
